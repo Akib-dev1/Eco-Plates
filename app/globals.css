@@ -3,8 +3,38 @@
 @plugin "daisyui";
 
 @custom-variant dark (&:is(.dark *));
+.pattern-bg {
+  background-color: var(--color-main-bg);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.03) 0,
+    rgba(0, 0, 0, 0.03) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.dark .pattern-bg {
+  background-color: #2f362d;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.05) 0,
+    rgba(255, 255, 255, 0.05) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
 
 @theme inline {
+  --font-oswald: var(--font-oswald);
+  --font-plus-jakarta-sans: var(--font-plus-jakarta-sans);
+  --color-main-bg: #bcc28f;
+  --color-nav-panel: #e7e3d5;
+  --color-primary-accent: #1a1a1a;
+  --color-input-text: #ffffff;
+  --color-primary-btn-bg: #1a1a1a;
+  --color-primary-btn-text: #ffffff;
+
   --radius-sm: calc(var(--radius) - 4px);
 
   --radius-md: calc(var(--radius) - 2px);
