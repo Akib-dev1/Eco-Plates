@@ -72,7 +72,7 @@ const Navbar = () => {
         ) : (
           <>
             <Link
-              href="/dashboard"
+              href="/dashboard/home"
               className="px-3 py-1.5 rounded-2xl font-semibold text-lg bg-primary-btn-bg text-primary-btn-text"
             >
               Dashboard

@@ -3,7 +3,17 @@
 import Image from "next/image";
 import { useCallback, useMemo, useRef, useState } from "react";
 
-const MOCK_INVENTORY_ITEMS = ["Organic Oats", "Miniket Rice", "Masoor Dal"];
+// const MOCK_INVENTORY_ITEMS = [
+//   "Grains",
+//   "Pulses",
+//   "Oils",
+//   "Spices",
+//   "Pantry Staples",
+//   "Beverages",
+//   "Snacks",
+//   "Fresh Essentials",
+//   "Condiments",
+// ];
 
 const MOCK_PREVIOUS_UPLOADS = [
   {
@@ -23,8 +33,9 @@ const MOCK_PREVIOUS_UPLOADS = [
   },
 ];
 
-export default function FoodScanUpload() {
+export default function FoodScanUpload({ items }) {
   const fileInputRef = useRef(null);
+  const MOCK_INVENTORY_ITEMS = items.map((e) => e.name);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);

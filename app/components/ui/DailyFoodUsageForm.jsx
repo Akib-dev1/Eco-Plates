@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export default function DailyFoodUsageForm() {
+export default function DailyFoodUsageForm({ userInventory }) {
   const { data } = useSession();
   const router = useRouter();
   const handleLogEntry = async (e) => {
@@ -48,12 +48,35 @@ export default function DailyFoodUsageForm() {
       >
         <label className="flex flex-col gap-1 text-xs sm:text-sm text-neutral-200">
           Item Name
-          <input
-            type="text"
-            placeholder="e.g., Apple"
+          <select
             name="itemName"
-            className="rounded-lg bg-[#262626] border border-neutral-700 px-3 py-2 text-sm text-input-text placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
-          />
+            id="itemName"
+            className="
+    w-full
+    bg-white
+    text-primary-accent
+    px-4 py-2
+    rounded-lg
+    border border-primary-accent/20
+    shadow-sm
+    focus:outline-none
+    focus:ring-2
+    focus:ring-primary-accent/40
+    focus:border-primary-accent
+    transition-all
+    cursor-pointer
+  "
+          >
+            {userInventory.map((item) => (
+              <option
+                key={item._id}
+                value={item.name}
+                className="text-primary-accent"
+              >
+                {item.name}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label className="flex flex-col gap-1 text-xs sm:text-sm text-neutral-200">

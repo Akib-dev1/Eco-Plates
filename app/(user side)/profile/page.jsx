@@ -60,11 +60,17 @@ const getInventory = async (email) => {
   return res.json();
 };
 
+const getMainInventory = async () => {
+  const res = await fetch(`http://localhost:3000/api/inventory/`);
+  return res.json();
+};
+
 export default async function DashboardPage() {
   const { user } = await getServerSession(authOptions);
   const userData = await getData(user.email);
   const userHistory = await getHistory(user.email);
   const userInventory = await getInventory(user.email);
+  const mainInventoryData = await getMainInventory();
 
   return (
     <div className="min-h-screen bg-main-bg px-4 sm:px-6 lg:px-8 py-8 font-plus-jakarta-sans">
@@ -76,11 +82,14 @@ export default async function DashboardPage() {
 
           <div className="border-t border-neutral-800" />
 
-          <DailyFoodUsageForm />
+          <DailyFoodUsageForm userInventory={userInventory} />
 
           <div className="border-t border-neutral-800" />
 
-          <InventoryTable items={userInventory} />
+          <InventoryTable
+            items={userInventory}
+            mainInventoryData={mainInventoryData}
+          />
 
           <div className="border-t border-neutral-800" />
 

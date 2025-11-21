@@ -4,8 +4,12 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-export default function AddInventoryModal({ open, onClose, onAdd }) {
-  const [name, setName] = useState("");
+export default function AddInventoryModal({
+  open,
+  onClose,
+  onAdd,
+  mainInventoryData,
+}) {
   const [quantity, setQuantity] = useState("");
   const [dateAdded, setDateAdded] = useState("");
   const { data } = useSession();
@@ -14,6 +18,8 @@ export default function AddInventoryModal({ open, onClose, onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get("item-name");
 
     const newItem = {
       name,
@@ -27,7 +33,6 @@ export default function AddInventoryModal({ open, onClose, onAdd }) {
     console.log("New inventory item:", newItem);
 
     // reset & close
-    setName("");
     setQuantity("");
     setDateAdded("");
     onClose?.();
@@ -57,15 +62,35 @@ export default function AddInventoryModal({ open, onClose, onAdd }) {
             <label className="text-xs text-neutral-300" htmlFor="item-name">
               Item Name
             </label>
-            <input
+            <select
+              name="item-name"
               id="item-name"
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., Organic Milk"
-              className="rounded-lg bg-[#262626] border border-neutral-700 px-3 py-2 text-sm text-input-text placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400"
-            />
+              className="
+    w-full
+    bg-white
+    text-primary-accent
+    px-4 py-2
+    rounded-lg
+    border border-primary-accent/20
+    shadow-sm
+    focus:outline-none
+    focus:ring-2
+    focus:ring-primary-accent/40
+    focus:border-primary-accent
+    transition-all
+    cursor-pointer
+  "
+            >
+              {mainInventoryData.map((item) => (
+                <option
+                  key={item._id}
+                  value={item.name}
+                  className="text-primary-accent"
+                >
+                  {item.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="flex flex-col gap-1">

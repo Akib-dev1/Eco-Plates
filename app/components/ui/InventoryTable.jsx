@@ -6,7 +6,10 @@ import AddInventoryModal from "./AddInventoryModal";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-export default function InventoryTable({ items: initialItems }) {
+export default function InventoryTable({
+  items: initialItems,
+  mainInventoryData,
+}) {
   //   const [items, setItems] = useState(initialItems || []);
   const items = initialItems || [];
   const router = useRouter();
@@ -141,6 +144,7 @@ export default function InventoryTable({ items: initialItems }) {
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAdd={handleAddItem}
+        mainInventoryData={mainInventoryData}
       />
     </div>
   );
