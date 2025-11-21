@@ -3,6 +3,7 @@
 
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function DashboardClient({
@@ -13,7 +14,11 @@ export default function DashboardClient({
   expiringItems,
   user,
 }) {
-  const handleAddItem = () => console.log("Add item");
+  const route = useRouter();
+  const handleLogout = () => {
+    route.push("/login");
+    signOut();
+  };
   const handleGeneratePlan = () => console.log("Generate plan");
 
   return (
@@ -21,7 +26,7 @@ export default function DashboardClient({
       {/* ✅ LOGOUT BUTTON (TOP RIGHT) */}
       <div className="max-w-11/12 sm:max-w-10/12 lg:max-w-9/12 mx-auto flex justify-end py-6">
         <button
-          onClick={() => signOut()}
+          onClick={handleLogout}
           className="px-4 py-2 rounded-full bg-primary-accent text-input-text text-sm font-medium hover:bg-primary-accent/90"
         >
           Logout
@@ -41,12 +46,12 @@ export default function DashboardClient({
 
           {/* CTA Buttons */}
           <div className="flex gap-3 mt-4">
-            <button
-              onClick={handleAddItem}
+            <Link
+              href={"/profile"}
               className="px-4 py-2 rounded-full bg-primary-accent text-input-text text-sm hover:bg-primary-accent/90"
             >
               Add Item
-            </button>
+            </Link>
             <Link
               href={"/ai-dashboard"}
               className="px-4 py-2 rounded-full bg-nav-panel text-primary-accent border border-primary-accent/10 hover:bg-primary-accent/5"
@@ -58,6 +63,12 @@ export default function DashboardClient({
               className="px-4 py-2 rounded-full bg-nav-panel text-primary-accent border border-primary-accent/10 hover:bg-primary-accent/5"
             >
               Insights
+            </Link>
+            <Link
+              href={"/nourishbot"}
+              className="px-4 py-2 rounded-full bg-nav-panel text-primary-accent border border-primary-accent/10 hover:bg-primary-accent/5"
+            >
+              NourishBot
             </Link>
           </div>
         </section>

@@ -64,38 +64,47 @@ export default function AIDashboardPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-2">Eco-Plates AI Assistant</h1>
+    <div className="min-h-screen bg-main-bg py-10">
+      <div className="max-w-6xl mx-auto px-8 py-12">
+        {/* Page title */}
+        <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
+          Eco-Plates AI Assistant
+        </h1>
+        <div className="mt-4 h-px w-full bg-slate-300/70" />
 
-      {/* Section 2: AI "What to eat today?" */}
-      <section className="border-t pt-6">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xl font-semibold">
-            Ask AI: What to Eat the whole week?
-          </h2>
-          <button
-            onClick={handleAskAI}
-            disabled={loadingAI || !user?.email}
-            className="px-4 py-2 rounded-md bg-green-600 text-white text-sm font-medium disabled:opacity-60"
-          >
-            {loadingAI ? "Thinking…" : "Get Suggestions"}
-          </button>
-        </div>
+        {/* AI Section */}
+        <section className="mt-8">
+          <div className="flex items-center justify-between rounded-2xl bg-neutral-900 px-10 py-7 shadow-xl gap-8">
+            <div className="text-white">
+              <h2 className="text-lg font-semibold">
+                Ask AI: What to Eat the whole week?
+              </h2>
 
-        {!aiSuggestions && (
-          <p className="text-xs text-gray-600">
-            Click the button to get simple meal ideas using your top-priority
-            items.
-          </p>
-        )}
+              {!aiSuggestions && (
+                <p className="mt-2 text-xs text-gray-300 max-w-xl">
+                  Click the button to get simple meal ideas using your
+                  top-priority items.
+                </p>
+              )}
+            </div>
 
-        {aiSuggestions && (
-          <div className="mt-3 text-sm text-gray-800 bg-white border rounded-lg p-4 shadow-sm">
-            {/* Gemini returns markdown-ish text; simple render */}
-            <pre className="whitespace-pre-wrap text-sm">{aiSuggestions}</pre>
+            <button
+              onClick={handleAskAI}
+              disabled={loadingAI || !user?.email}
+              className="inline-flex items-center justify-center rounded-xl border-2 border-neutral-900 bg-white px-8 py-3 text-sm font-semibold text-neutral-900 shadow-[0_6px_0_rgba(23,23,23,1)] disabled:opacity-60"
+            >
+              {loadingAI ? "Thinking…" : "Get Suggestions"}
+            </button>
           </div>
-        )}
-      </section>
+
+          {aiSuggestions && (
+            <div className="mt-4 text-sm text-gray-800 bg-white border rounded-lg p-4 shadow-sm">
+              {/* Gemini returns markdown-ish text; simple render */}
+              <pre className="whitespace-pre-wrap text-sm">{aiSuggestions}</pre>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }

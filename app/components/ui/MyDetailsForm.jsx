@@ -75,7 +75,7 @@ export default function MyDetailsForm({ userData }) {
 
           {/* Budget */}
           <label className="flex flex-col gap-1 text-xs sm:text-sm text-neutral-200">
-            Monthly Budget ($)
+            Weekly Budget ($)
             <input
               type="number"
               value={budget}
