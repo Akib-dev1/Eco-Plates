@@ -47,12 +47,12 @@ export default function DashboardClient({
             >
               Add Item
             </button>
-            <button
-              onClick={handleGeneratePlan}
+            <Link
+              href={"/ai-dashboard"}
               className="px-4 py-2 rounded-full bg-nav-panel text-primary-accent border border-primary-accent/10 hover:bg-primary-accent/5"
             >
               Generate Plan
-            </button>
+            </Link>
             <Link
               href={"/insights"}
               className="px-4 py-2 rounded-full bg-nav-panel text-primary-accent border border-primary-accent/10 hover:bg-primary-accent/5"
