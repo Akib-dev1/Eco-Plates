@@ -1,7 +1,8 @@
 import FoodScanUpload from "@/app/components/ui/FoodScanUpload";
+export const dynamic = "force-dynamic";
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/inventory");
+  const res = await fetch("https://eco-plates.vercel.app/api/inventory");
   return res.json();
 };
 

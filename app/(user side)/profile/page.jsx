@@ -6,67 +6,33 @@ import MyDetailsForm from "@/app/components/ui/MyDetailsForm";
 import WelcomeBanner from "@/app/components/ui/WelcomeBanner";
 import { getServerSession } from "next-auth";
 
-const mockInventory = [
-  {
-    id: 1,
-    name: "Organic Milk",
-    quantity: "1 Gallon",
-    dateAdded: "2023-10-26",
-  },
-  {
-    id: 2,
-    name: "Whole Wheat Bread",
-    quantity: "1 Loaf",
-    dateAdded: "2023-10-25",
-  },
-  { id: 3, name: "Avocados", quantity: "4", dateAdded: "2023-10-24" },
-];
-
-const mockHistory = [
-  {
-    id: 1,
-    name: "Apple Slices",
-    quantity: "1 cup",
-    category: "Snack",
-    date: "2023-10-26",
-  },
-  {
-    id: 2,
-    name: "Grilled Chicken",
-    quantity: "4 oz",
-    category: "Protein",
-    date: "2023-10-25",
-  },
-];
+export const dynamic = "force-dynamic";
 
 const getData = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/users/${email}`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(`https://eco-plates.vercel.app/api/users/${email}`);
   return res.json();
 };
 
 const getHistory = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/logs/${email}`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(`https://eco-plates.vercel.app/api/logs/${email}`);
   return res.json();
 };
 
 const getInventory = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/inventoryUsers/${email}`, {
-    cache: "force-cache",
-  });
+  const res = await fetch(
+    `https://eco-plates.vercel.app/api/inventoryUsers/${email}`
+  );
   return res.json();
 };
 
 const getMainInventory = async () => {
-  const res = await fetch(`http://localhost:3000/api/inventory/`);
+  const res = await fetch(`https://eco-plates.vercel.app/api/inventory/`);
   return res.json();
 };
 
 export default async function DashboardPage() {
-  const { user } = await getServerSession(authOptions);
+  const data = await getServerSession(authOptions);
+  const user = data?.user;
   const userData = await getData(user.email);
   const userHistory = await getHistory(user.email);
   const userInventory = await getInventory(user.email);

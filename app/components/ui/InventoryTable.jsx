@@ -25,7 +25,7 @@ export default function InventoryTable({
   };
 
   const handleAddItem = async (newItem) => {
-    const res = await fetch("http://localhost:3000/api/inventoryUsers", {
+    const res = await fetch("https://eco-plates.vercel.app/api/inventoryUsers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export default function InventoryTable({
   const handleDeleteItem = async (item) => {
     console.log("delete inventory item", item);
     const res = await fetch(
-      `http://localhost:3000/api/inventoryUsers/${item}`,
+      `https://eco-plates.vercel.app/api/inventoryUsers/${item}`,
       {
         method: "DELETE",
       }

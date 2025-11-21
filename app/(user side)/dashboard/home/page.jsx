@@ -5,26 +5,31 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import DashboardClient from "@/app/components/ui/DashboardClient";
 import { getServerSession } from "next-auth";
 
+export const dynamic = "force-dynamic";
+
 // master inventory (static item info)
 
 const getData1 = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/inventoryUsers/${email}`);
+  const res = await fetch(
+    `https://eco-plates.vercel.app/api/inventoryUsers/${email}`
+  );
   return res.json();
 };
 
 const getData2 = async () => {
-  const res = await fetch(`http://localhost:3000/api/inventory`);
+  const res = await fetch(`https://eco-plates.vercel.app/api/inventory`);
   return res.json();
 };
 
 const getData3 = async (email) => {
-  const res = await fetch(`http://localhost:3000/api/logs/${email}`);
+  const res = await fetch(`https://eco-plates.vercel.app/api/logs/${email}`);
   return res.json();
 };
 
 export default async function DashboardPage() {
-  const { user } = await getServerSession(authOptions);
-  const email = user?.email;
+  const data = await getServerSession(authOptions);
+  const user = data?.user;
+  const email = user.email;
   const USER_INVENTORY = await getData1(email);
 
   const INVENTORY_MASTER = await getData2();

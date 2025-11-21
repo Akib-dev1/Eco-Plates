@@ -21,7 +21,7 @@ export default function DailyFoodUsageForm({ userInventory }) {
       email: data.user.email,
       dateLogged: new Date().toISOString().split("T")[0],
     };
-    const res = await fetch("http://localhost:3000/api/logs", {
+    const res = await fetch("https://eco-plates.vercel.app/api/logs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

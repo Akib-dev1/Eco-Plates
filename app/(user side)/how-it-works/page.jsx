@@ -6,13 +6,16 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/resources");
+  const res = await fetch("https://eco-plates.vercel.app/api/resources");
   return res.json();
 };
 
 export default async function HowItWorksPage() {
-  const { user } = await getServerSession(authOptions);
+  const data = await getServerSession(authOptions);
+  const user = data?.user || null;
   const Resources = await getData();
   return (
     <div className="min-h-screen bg-main-bg text-primary-accent font-plus-jakarta-sans">

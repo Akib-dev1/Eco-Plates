@@ -1,11 +1,11 @@
 import ResourceHub from "@/app/components/ui/ResourceHub";
 
+export const dynamic = "force-dynamic";
+
 // Minimal demo data (you'll replace this later)
 
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/resources", {
-    cache: "force-cache",
-  });
+  const res = await fetch("https://eco-plates.vercel.app/api/resources");
   return res.json();
 };
 

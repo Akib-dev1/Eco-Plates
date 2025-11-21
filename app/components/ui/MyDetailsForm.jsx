@@ -31,7 +31,7 @@ export default function MyDetailsForm({ userData }) {
 
     console.log("Submitting user details:", payload);
     const res = await fetch(
-      `http://localhost:3000/api/users/${userData?.email}`,
+      `https://eco-plates.vercel.app/api/users/${userData?.email}`,
       {
         method: "PUT",
         headers: {

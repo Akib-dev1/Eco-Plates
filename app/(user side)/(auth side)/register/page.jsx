@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 
+export const dynamic = "force-dynamic";
+
 const RegisterPage = () => {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,7 +53,7 @@ const RegisterPage = () => {
         createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch("http://localhost:3000/api/users", {
+      const res = await fetch("https://eco-plates.vercel.app/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
